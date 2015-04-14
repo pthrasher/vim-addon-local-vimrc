@@ -38,11 +38,9 @@ fun! LVRSource(file, cache)
 
   let p = expand(a:file)
   let h = call(function(s:c.hash_fun), [a:file, a:cache.seed])
-  " if hash doesn't match or no hash exists ask user to confirm sourcing this file
-  if get(a:cache, p, 'no-hash') == h || 1 == confirm('source '.p,"&Y\n&n",2)
-    let a:cache[p] = h
-    exec 'source '.fnameescape(p)
-  endif
+  
+  let a:cache[p] = h
+  exec 'source '.fnameescape(p)
 endf
 
 fun! LVRWithCache(F, args)
